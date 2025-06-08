@@ -4,6 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MH GPA & CGPA Calculator</title>
+    <meta
+      name="description"
+      content="Easily calculate GPA and CGPA using this modern, mobile-friendly web tool built for Ethiopian university students. Supports credit-weighted GPA/CGPA, semester tracking, and result history."
+    />
+    <meta
+      name="keywords"
+      content="GPA calculator, CGPA calculator, Ethiopian GPA system, university GPA tool, GPA average calculator"
+    />
+    <meta name="author" content="Mihretu Hizkel MH" />
+    <meta
+      property="og:title"
+      content="GPA & CGPA Calculator for Ethiopian Students"
+    />
+    <meta
+      property="og:description"
+      content="Free, fast, and mobile-friendly GPA/CGPA calculator tailored for Ethiopian universities. Track your performance across semesters easily."
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "MH GPA & CGPA Calculator for Ethiopian Universities",
+        "url": "https://mhgpacalculator.netlify.app",
+        "applicationCategory": "EducationApplication",
+        "operatingSystem": "All",
+        "author": {
+          "@type": "Person",
+          "name": "Mihretu Hizkle MH"
+        }
+      }
+    </script>
     <style>
       :root {
         --bg-color: #f1efef;
@@ -241,11 +272,13 @@
         <h3>GPA Calculator</h3>
         <table id="courseTable">
           <tr>
+            <th>No.</th>
             <th>Course</th>
             <th>Credits</th>
             <th>Grade</th>
           </tr>
           <tr>
+            <td>1</td>
             <td><input type="text" class="course" /></td>
             <td><input type="number" step="1" class="courseCredits" /></td>
             <td>
@@ -395,8 +428,10 @@
 
       function addCourse() {
         const table = document.getElementById("courseTable");
+        const rowCount = table.rows.length;
         const row = table.insertRow();
         row.innerHTML = `
+        <td>${rowCount}</td>
         <td><input type="text" class="course" /></td>
         <td><input type="number" step="1" class="courseCredits" /></td>
         <td>
@@ -487,10 +522,11 @@
         if (entry.type === "GPA") {
           const table = document.getElementById("courseTable");
           table.innerHTML =
-            "<tr><th>Course</th><th>Credits</th><th>Grade</th></tr>";
-          entry.values.forEach(({ course, letter, grade, credits }) => {
+            "<tr><th>No.</th><th>Course</th><th>Credits</th><th>Grade</th></tr>";
+          entry.values.forEach(({ course, letter, grade, credits }, index) => {
             const row = table.insertRow();
             row.innerHTML = `
+        <td>${index + 1}</td>
         <td><input type="text" class="course" value="${course || ""}" /></td>
         <td><input type="number" class="courseCredits" value="${credits}" /></td>
         <td><select class="grade">
